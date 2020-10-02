@@ -18,6 +18,29 @@
             width: 100%;
             padding-top: 100px;
         }
+        form input[type=text]{
+            width: 330px;
+        }
+        form input[type=submit] {
+            width: 100px;
+        }
+        ul {
+            padding: 0;
+        }
+        .todo-ul-li {
+            list-style: none;
+            padding: 2px 4px;
+        }
+        .todo-ul-li button {
+            float: right;
+        }
+        .checked {
+            text-decoration: line-through;
+            color: red;
+        }
+        .fa-trash,.fa-check {
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -36,6 +59,17 @@
         const todo_input = document.querySelector('.todo-input');
         const todo_btn = document.querySelector('.todo-btn');
         const todo_ul = document.querySelector('.todo-ul');
+        todo_ul.addEventListener('click', function(e){
+            const item = e.target;
+            if(item.classList[0] === 'trash'){
+                const todo = item.parentElement;
+                todo.remove();
+            }
+            if(item.classList[0] === 'check'){
+                const todo = item.parentElement;
+                todo.classList.toggle('checked');
+            }
+        })
 
         todo_btn.addEventListener('click', function(e){
             e.preventDefault();
@@ -47,16 +81,18 @@
             todo_ul_li.innerText = todo_input.value;
             todo_ul.appendChild(todo_ul_li);
 
+            const trash = document.createElement('button');
+            trash.classList.add('trash');
+            trash.innerHTML = '<i class="fas fa-trash"></i>';
+            todo_ul_li.appendChild(trash);
+            
             const check = document.createElement('button');
             check.classList.add('check');
             check.innerHTML = '<i class="fas fa-check"></i>';
             todo_ul_li.appendChild(check);
 
-            const trash = document.createElement('button');
-            trash.classList.add('trash');
-            trash.innerHTML = '<i class="fas fa-trash"></i>';
-            todo_ul_li.appendChild(trash);
-
+            
+             
             todo_input.value = "";
 
             }else {
