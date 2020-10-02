@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS To Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css
+
+
+
+    ">
+    <style>
+        .todo-body {
+            width: 400px;
+            margin: 0 auto;
+        }
+        form {
+            width: 100%;
+            padding-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-body">
+        <form>
+            <input type="text" class="todo-input"> <button type="submit" class="todo-btn">Add</button>
+        </form>
+        <div class="todo-container">
+            <ul class="todo-ul">
+
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const todo_input = document.querySelector('.todo-input');
+        const todo_btn = document.querySelector('.todo-btn');
+        const todo_ul = document.querySelector('.todo-ul');
+
+        todo_btn.addEventListener('click', function(e){
+            e.preventDefault();
+
+            if(todo_input.value != ''){
+
+            const todo_ul_li = document.createElement('li');
+            todo_ul_li.classList.add('todo-ul-li');
+            todo_ul_li.innerText = todo_input.value;
+            todo_ul.appendChild(todo_ul_li);
+
+            const check = document.createElement('button');
+            check.classList.add('check');
+            check.innerHTML = '<i class="fas fa-check"></i>';
+            todo_ul_li.appendChild(check);
+
+            const trash = document.createElement('button');
+            trash.classList.add('trash');
+            trash.innerHTML = '<i class="fas fa-trash"></i>';
+            todo_ul_li.appendChild(trash);
+
+            todo_input.value = "";
+
+            }else {
+              alert('Please input data!!!!')
+            }
+            
+        })
+    </script>
+</body>
+</html>
